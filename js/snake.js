@@ -32,7 +32,19 @@ export class Snake {
         this.direction = dir;
     }
 
+    growSnake(){
+        let length = this.path.length;
+        let block = new Block(this.path[length-1].x,this.path[length-1].y,this.path[length-1].direction,this.path[length-1].type);
+        if(this.path[length-1].direction === "up")
+            block.y--
+
+            
+        this.path[length-1].type = "snakeBody";
+        this.path.push( block );
+    }
+
     iterate(direction){
+        this.growSnake()
         if(direction)
         {
             this.direction = direction;
@@ -62,19 +74,24 @@ export class Snake {
             block = this.moveToCurrentDirection(block)
         }
         else{
-
+            
+            let removeFirstPivot = false;
             if(this.pivots.length === 0)
             {
                     block = this.moveToCurrentDirection(block)
             }
             else{
+                
                 this.pivots.map(pivot => {
                     if(pivot.x === block.x && pivot.y === block.y)
                     {
-                        block.direction = pivot.direction
+                        block.direction = pivot.direction;
+                        if(block.type === "tail")
+                            removeFirstPivot = true;
                     }                
             });
                 block = this.moveToCurrentDirection(block);
+                if(removeFirstPivot)this.pivots.shift() 
             }
         }
         return block;
