@@ -1,6 +1,6 @@
 import {Snake} from './snake.js';
 
-setInterval(function(){ render(); }, 1000);
+setInterval(function(){ render(); }, 50);
 const board = document.getElementById('board');
 
 const changeToBlock =(x,y) => {
@@ -22,19 +22,42 @@ const changeToTarget =(x,y) => {
 
 
 let snake = new Snake();
+let direction = null;
 
 const render = () => {
+    snake.displaySnake().forEach(block => {
+        changeToBlock(block.x, block.y)
+    });
+    snake.iterate(direction);
+    direction = null;
+    snake.displaySnake().forEach(block => {
+        changeToSnakeBlock(block.x, block.y)
+    });
 
-    changeToSnakeHead(50,50)
-    changeToSnakeBlock(49,50)
-    changeToSnakeBlock(48,50)
-    changeToSnakeBlock(47,50)
-    changeToSnakeBlock(46,50)
-    changeToSnakeBlock(45,50)
 
     changeToTarget(68,68)
 
    
 }
 
-render();
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        direction = "up";
+    }
+    else if (e.keyCode == '40') {
+        direction = "down";
+    }
+    else if (e.keyCode == '37') {
+        direction = "left";
+    }
+    else if (e.keyCode == '39') {
+        direction = "right";
+    }
+
+}
+

@@ -9,16 +9,7 @@ export class Snake {
 
         this.board.map( column => { new Array(100) } )
         
-        /*for(var x=0; x < this.board.length; x++)
-        {
-            for(var y=0; y < this.board.length; y++)
-            {
-                this.board[x][y] = 'x';
-            }
-        }*/
-
-
-        this.path = [new Block(50,50), new Block(49,50), new Block(48,50)];
+        this.path = [new Block(50,50), new Block(49,50), new Block(48,50), new Block(47,50), new Block(46,50), new Block(45,50)];
 
         this.direction = "right";
 
@@ -37,28 +28,47 @@ export class Snake {
         this.direction = dir;
     }
 
-    iterate(){
-        if(this.direction === "left")
-            this.moveLeft()
-        if(this.direction === "right")
-            this.moveRight()
-        if(this.direction === "up")
-            this.moveUp()
-        if(this.direction === "down")
-            this.moveDown()
+    iterate(direction){
+        if(direction)
+        {
+            if(direction === "left")
+                this.moveLeft()
+            if(direction === "right")
+                this.moveRight()
+            if(direction === "up")
+                this.moveUp()
+            if(direction === "down")
+                this.moveDown()
+        }
+
+        if(!direction)
+        {
+            if(this.direction === "left")
+                this.moveLeft()
+            if(this.direction === "right")
+                this.moveRight()
+            if(this.direction === "up")
+                this.moveUp()
+            if(this.direction === "down")
+                this.moveDown()
+        }
     }
 
     moveUp(){
-        this.path.map( block => block.y++ )
+        this.path.map( block => block.y = Math.abs((block.y-1 + 100)%100) )
+        this.direction = "up";
     }
     moveDown(){
-        this.path.map( block => block.y-- )
+        this.path.map( block => block.y = Math.abs((block.y+1)%100) )
+        this.direction = "down";
     }
     moveLeft(){
-        this.path.map( block => block.x-- )
+        this.path.map( block => block.x = Math.abs((block.x-1 + 100)%100) )
+        this.direction = "left";
     }
-    moveRigt(){
-        this.path.map( block => block.x++ )
+    moveRight(){
+        this.path.map( block => block.x = Math.abs((block.x+1)%100) )
+        this.direction = "right";
     }
 
     
