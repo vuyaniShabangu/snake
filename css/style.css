@@ -7,8 +7,41 @@ h2 {
     background-color: #f3f3f3;
     width: 700px;
     height: 700px;
-    line-height: 700px;
     margin: auto auto;
+    /*line-height: 700px;
     text-align: center;
-    font-size: 30px;
+    font-size: 30px;*/
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto
+    auto auto auto auto auto auto auto auto auto auto;
+    
+    padding: 5px;
+}
+
+.block{
+    background-color: #f3f3f3 ;
+    border: 0.5px solid rgba(0, 0, 0, 0.8);
+}
+
+.snake-block{
+    background-color: lime ;
+    border: 0.5px solid rgba(0, 0, 0, 0.8);
+}
+
+.snake-head{
+    background-color: darkgreen ;
+    border: 0.5px solid rgba(0, 0, 0, 0.8);
+}
+
+.target{
+    background-color: #000 ;
+    border: 0.5px solid rgba(0, 0, 0, 0.8);
 }
