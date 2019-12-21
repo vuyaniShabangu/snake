@@ -1,6 +1,6 @@
 import {Snake} from './snake.js';
 
-setInterval(function(){ render(); }, 50);
+setInterval(function(){ render(); }, 100);
 const board = document.getElementById('board');
 
 const changeToBlock =(x,y) => {
@@ -31,7 +31,10 @@ const render = () => {
     snake.iterate(direction);
     direction = null;
     snake.displaySnake().forEach(block => {
-        changeToSnakeBlock(block.x, block.y)
+        if(block.type === "head")
+            changeToSnakeHead(block.x, block.y)
+        else
+            changeToSnakeBlock(block.x, block.y)
     });
 
 
