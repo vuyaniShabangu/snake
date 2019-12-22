@@ -8,15 +8,10 @@ export class Snake {
         this.board = new Array(100);
         for(var i=0; i < this.board.length; i++)
             this.board[i] = new Array(100);
-
         this.board.map( column => { new Array(100) } )
-        
         this.direction = "right";
-
         this.path = [new Block(50,50,this.direction,"head"), new Block(49,50,this.direction), new Block(48,50,this.direction), new Block(47,50,this.direction), new Block(46,50,this.direction), new Block(45,50,this.direction, "tail")];
-
         this.plotPath()
-
         this.pivots = new Array();
     }
 
@@ -38,7 +33,6 @@ export class Snake {
         if(this.path[length-1].direction === "up")
             block.y--
 
-            
         this.path[length-1].type = "snakeBody";
         this.path.push( block );
     }
@@ -50,21 +44,7 @@ export class Snake {
             this.direction = direction;
             this.pivots.push(new Pivot(this.path[0].x, this.path[0].y, direction));
         }
-
-        if(!direction)
-        {
-            /*if(this.direction === "left")
-                this.moveLeft()
-            if(this.direction === "right")
-                this.moveRight()
-            if(this.direction === "up")
-                this.moveUp()
-            if(this.direction === "down")
-                this.moveDown()*/
-        }
-        
         this.path.map(block => {this.move(block)});
-
     }
 
     move(block){
@@ -144,14 +124,17 @@ export class Snake {
         block.y = Math.abs((block.y-1 + 100)%100)
         return block;
     }
+
     moveDown(block){
         block.y = Math.abs((block.y+1)%100)
         return block;
     }
+
     moveLeft(block){
         block.x = Math.abs((block.x-1 + 100)%100)
         return block;
     }
+
     moveRight(block){
         block.x = Math.abs((block.x+1)%100)
         return block;
