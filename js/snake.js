@@ -1,5 +1,6 @@
 import {Block} from './block.js';
 import {Pivot} from './pivot.js';
+import {Target} from './target.js';
 
 
 export class Snake {
@@ -38,7 +39,6 @@ export class Snake {
     }
 
     iterate(direction){
-        this.growSnake()
         if(direction)
         {
             this.direction = direction;
