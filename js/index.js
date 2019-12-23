@@ -36,9 +36,9 @@ const render = () => {
         else
             changeToSnakeBlock(block.x, block.y)
     });
+    snake.displayTarget()
 
-
-    changeToTarget(68,68)
+    changeToTarget(snake.displayTarget().x, snake.displayTarget().y)
 
    
 }

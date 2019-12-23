@@ -14,10 +14,15 @@ export class Snake {
         this.path = [new Block(50,50,this.direction,"head"), new Block(49,50,this.direction), new Block(48,50,this.direction), new Block(47,50,this.direction), new Block(46,50,this.direction), new Block(45,50,this.direction, "tail")];
         this.plotPath()
         this.pivots = new Array();
+        this.target = new Target(0,0,"");
     }
 
     plotPath(){
         this.path.forEach( block => this.board[block.x][block.y] = block )
+    }
+
+    displayTarget(){
+        return this.target;
     }
 
     displaySnake(){
@@ -38,6 +43,32 @@ export class Snake {
         this.path.push( block );
     }
 
+    isTargetHit(head, target){
+        return (head.x === target.x && head.y === target.y);
+    }
+
+    isValidDirectionChange(headDirection, newDirection){
+        let valid = true;
+        if(headDirection === "up" && newDirection === "down")
+            valid = false;
+        if(headDirection === "down" && newDirection === "up")
+            valid = false;
+        if(headDirection === "left" && newDirection === "right")
+            valid = false;
+        if(headDirection === "right" && newDirection === "left")
+            valid = false;
+        
+        if(headDirection === "up" && newDirection === "down")
+            valid = false;
+        if(headDirection === "down" && newDirection === "up")
+            valid = false;
+        if(headDirection === "left" && newDirection === "right")
+            valid = false;
+        if(headDirection === "right" && newDirection === "left")
+            valid = false;
+        return valid
+    }
+
     iterate(direction){
         if(direction)
         {
@@ -45,12 +76,19 @@ export class Snake {
             this.pivots.push(new Pivot(this.path[0].x, this.path[0].y, direction));
         }
         this.path.map(block => {this.move(block)});
+        
+        if(this.isTargetHit(this.path[0], this.target)){
+            this.target.plotTarget();
+        }
     }
 
     move(block){
         if(block.type === "head" )
-        {
-            block.direction = this.direction
+        {   
+            if(this.isValidDirectionChange(block.direction, this.direction))
+            {
+                block.direction = this.direction
+            }
             block = this.moveToCurrentDirection(block)
         }
         else{
@@ -65,7 +103,8 @@ export class Snake {
                 this.pivots.map(pivot => {
                     if(pivot.x === block.x && pivot.y === block.y)
                     {
-                        block.direction = pivot.direction;
+                        if(this.isValidDirectionChange(block.direction, pivot.direction))
+                            block.direction = pivot.direction;
                         if(block.type === "tail")
                             removeFirstPivot = true;
                     }                
