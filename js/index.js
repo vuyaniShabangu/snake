@@ -1,7 +1,32 @@
 import {Snake} from './snake.js';
 
-setInterval(function(){ render(); }, 100);
+
+let snake = new Snake();
+let direction = null;
 const board = document.getElementById('board');
+
+let interval = setInterval(function(){ render(); console.log(snake.getInterval())}, snake.getInterval());
+
+const render = () => {
+    snake.displaySnake().forEach(block => {
+        changeToBlock(block.x, block.y)
+    });
+    snake.iterate(direction);
+    direction = null;
+    snake.displaySnake().map(block => {
+        if(block.type === "head")
+            changeToSnakeHead(block.x, block.y)
+        else
+            changeToSnakeBlock(block.x, block.y)
+    });
+    snake.displayTarget()
+
+    changeToTarget(snake.displayTarget().x, snake.displayTarget().y)
+    clearInterval(interval);
+    interval = setInterval(function(){ render(); console.log(snake.getInterval())}, snake.getInterval());
+}
+
+
 
 const changeToBlock =(x,y) => {
     document.getElementById(x+","+y).className = "block";
@@ -19,29 +44,6 @@ const changeToTarget =(x,y) => {
     document.getElementById(x+","+y).className = "target";
 }
 
-
-
-let snake = new Snake();
-let direction = null;
-
-const render = () => {
-    snake.displaySnake().forEach(block => {
-        changeToBlock(block.x, block.y)
-    });
-    snake.iterate(direction);
-    direction = null;
-    snake.displaySnake().forEach(block => {
-        if(block.type === "head")
-            changeToSnakeHead(block.x, block.y)
-        else
-            changeToSnakeBlock(block.x, block.y)
-    });
-    snake.displayTarget()
-
-    changeToTarget(snake.displayTarget().x, snake.displayTarget().y)
-
-   
-}
 
 document.onkeydown = checkKey;
 

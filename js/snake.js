@@ -15,6 +15,7 @@ export class Snake {
         this.plotPath()
         this.pivots = new Array();
         this.target = new Target(0,0,"");
+        this.interval = 100;
     }
 
     plotPath(){
@@ -29,18 +30,33 @@ export class Snake {
         return this.path;
     }
 
+    getInterval(){
+        return this.interval;
+    }
+
     changeDirection(dir){
         this.direction = dir;
     }
 
+    reduceInterval(){
+        if(this.interval-5 >= 20)
+            this.interval -= 5;
+    }
+
     growSnake(){
         let length = this.path.length;
-        let block = new Block(this.path[length-1].x,this.path[length-1].y,this.path[length-1].direction,this.path[length-1].type);
-        if(this.path[length-1].direction === "up")
-            block.y--
+        let tail = {...this.path[length - 1]};
+        this.path[length - 1].type = "snakeBody";
 
-        this.path[length-1].type = "snakeBody";
-        this.path.push( block );
+        if(tail.direction === "up")
+            tail.y++
+        if(tail.direction === "down")
+            tail.y--
+        if(tail.direction === "right")
+            tail.x--
+        if(tail.direction === "left")
+            tail.x++
+        this.path.push(tail);
     }
 
     isTargetHit(head, target){
@@ -70,6 +86,12 @@ export class Snake {
     }
 
     iterate(direction){
+        if(this.isTargetHit(this.path[0], this.target)){
+            this.target.plotTarget();
+            this.growSnake();
+            this.reduceInterval()
+        }
+
         if(direction)
         {
             this.direction = direction;
@@ -77,9 +99,7 @@ export class Snake {
         }
         this.path.map(block => {this.move(block)});
         
-        if(this.isTargetHit(this.path[0], this.target)){
-            this.target.plotTarget();
-        }
+        
     }
 
     move(block){
