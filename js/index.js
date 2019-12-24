@@ -66,3 +66,7 @@ function checkKey(e) {
 
 }
 
+document.getElementById('up').onclick = (a=>{direction="up"});
+document.getElementById('down').onclick = (a=>{direction="down"})
+document.getElementById('left').onclick = (a=>{direction="left"})
+document.getElementById('right').onclick = (a=>{direction="right"})
