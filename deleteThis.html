@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="board">
+
+    </div>
+
+</body>
+<script>
+    const board = document.getElementById("board");
+    for(let x=0; x<30; x++)
+    {
+        for(let y=0; y<30; y++)
+        {
+            board.innerHTML+='<div class="block" id="'+y+','+x+'">'
+        }
+    }
+</script>
+</html>

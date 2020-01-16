@@ -6,12 +6,12 @@ import {Target} from './target.js';
 export class Snake {
 
     constructor(){
-        this.board = new Array(100);
+        this.board = new Array(30);
         for(var i=0; i < this.board.length; i++)
-            this.board[i] = new Array(100);
-        this.board.map( column => { new Array(100) } )
+            this.board[i] = new Array(30);
+        this.board.map( column => { new Array(30) } )
         this.direction = "right";
-        this.path = [new Block(50,50,this.direction,"head"), new Block(49,50,this.direction), new Block(48,50,this.direction), new Block(47,50,this.direction), new Block(46,50,this.direction), new Block(45,50,this.direction, "tail")];
+        this.path = [new Block(15,15,this.direction,"head"), new Block(14,15,this.direction), new Block(13,15,this.direction), new Block(12,15,this.direction), new Block(11,15,this.direction), new Block(10,15,this.direction, "tail")];
         this.plotPath()
         this.pivots = new Array();
         this.target = new Target(0,0,"");
@@ -40,7 +40,7 @@ export class Snake {
 
     reduceInterval(){
         if(this.interval-5 >= 20)
-            this.interval -= 5;
+            this.interval -= 2;
     }
 
     growSnake(){
@@ -180,22 +180,22 @@ export class Snake {
     }
 
     moveUp(block){
-        block.y = Math.abs((block.y-1 + 100)%100)
+        block.y = Math.abs((block.y-1 + 30)%30)
         return block;
     }
 
     moveDown(block){
-        block.y = Math.abs((block.y+1)%100)
+        block.y = Math.abs((block.y+1)%30)
         return block;
     }
 
     moveLeft(block){
-        block.x = Math.abs((block.x-1 + 100)%100)
+        block.x = Math.abs((block.x-1 + 30)%30)
         return block;
     }
 
     moveRight(block){
-        block.x = Math.abs((block.x+1)%100)
+        block.x = Math.abs((block.x+1)%30)
         return block;
     }
 
