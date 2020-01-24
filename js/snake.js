@@ -16,6 +16,7 @@ export class Snake {
         this.pivots = new Array();
         this.target = new Target(0,0,"");
         this.interval = 100;
+        this.score = 0;
     }
 
     plotPath(){
@@ -85,11 +86,21 @@ export class Snake {
         return valid
     }
 
+    getScore(){
+        return this.score;
+    }
+
+    increaseScore(){
+        this.score += 1;
+    }
+
     iterate(direction){
+        
         if(this.isTargetHit(this.path[0], this.target)){
             this.target.plotTarget();
             this.growSnake();
             this.reduceInterval()
+            this.increaseScore();
         }
 
         if(direction)
@@ -99,7 +110,16 @@ export class Snake {
         }
         this.path.map(block => {this.move(block)});
         
-        
+        this.isEndGame()
+    }
+
+    isEndGame(){
+        let endGame = false;
+        let head = this.path[0];
+        this.path.map(bodyPart => {
+            if(bodyPart.type !== "head" && bodyPart.x === head.x && bodyPart.y === head.y)
+                alert("GAME OVER!")
+        });
     }
 
     move(block){
@@ -134,6 +154,11 @@ export class Snake {
             }
         }
         return block;
+    }
+
+    moveSnake(){
+        this.growSnake();
+        
     }
 
 

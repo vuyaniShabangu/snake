@@ -4,6 +4,7 @@ import {Snake} from './snake.js';
 let snake = new Snake();
 let direction = null;
 const board = document.getElementById('board');
+const scoreDisplay = document.getElementById('score');
 
 let interval = setInterval(function(){ render(); console.log(snake.getInterval())}, snake.getInterval());
 
@@ -21,9 +22,11 @@ const render = () => {
     });
     snake.displayTarget()
 
+    scoreDisplay.innerHTML = snake.getScore();
+
     changeToTarget(snake.displayTarget().x, snake.displayTarget().y)
     clearInterval(interval);
-    interval = setInterval(function(){ render(); console.log(snake.getInterval())}, snake.getInterval());
+    interval = setInterval(function(){ render(); }, snake.getInterval());
 }
 
 

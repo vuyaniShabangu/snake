@@ -7,7 +7,7 @@ export class Target extends Block {
         this.type = "target";
     }
 
-    plotTarget(){
+    plotTarget(snake){
         this.x = this.plotTargetCoordinate();
         this.y = this.plotTargetCoordinate()
     }

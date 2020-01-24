@@ -51,4 +51,10 @@ h2 {
     justify-content: center;
 }
 
+#score{
+    font-size: 100px;
+    right: 0;
+    top: 40px;
+    position: absolute;
+}
 
