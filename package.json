@@ -4,6 +4,7 @@
   "description": "JS Snake Game",
   "main": "index.html",
   "scripts": {
+    "start": "http-server .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/vuyaniShabangu/snake/issues"
   },
-  "homepage": "https://github.com/vuyaniShabangu/snake#readme"
+  "homepage": "https://github.com/vuyaniShabangu/snake#readme",
+  "dependencies": {
+    "http-server": "^13.0.1"
+  }
 }
